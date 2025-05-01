@@ -4,12 +4,11 @@
   "newArchEnabled": true,
   "icon": "./assets/images/nectarIcon.png",
   "splash": {
-  "resizeMode": "cover",
-  "backgroundColor": "#ffffff"
-},
-
+    "resizeMode": "cover",
+    "backgroundColor": "#ffffff"
+  },
   "ios": {
-    "icon": "./assets/images/ios-dark.png" ,
+    "icon": "./assets/images/ios-dark.png",
     "supportsTablet": true
   },
   "android": {
@@ -38,5 +37,6 @@
     "eas": {
       "projectId": "eb48bf62-4773-4997-8bba-9282135f0503"
     }
-  }
+  },
+  "owner": "ayselch"
 }
