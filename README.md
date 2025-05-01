@@ -1,50 +1,129 @@
-# Welcome to your Expo app 👋
+# Nectar - Mobile Grocery Shopping App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern React Native grocery shopping application that offers a seamless shopping experience with an intuitive user interface and comprehensive features.
 
-## Get started
+## 🌟 Features
 
-1. Install dependencies
+- **User Authentication**
+  - Email-based registration and login
+  - Secure password management
+  - Location-based services
+  - Profile management
 
+- **Shopping Experience**
+  - Rich product catalog with categories
+  - Advanced search functionality
+  - Product filtering and sorting
+  - Detailed product views with images
+  - Shopping cart management
+  - Favorites list
+  - Checkout process
+
+- **Product Categories**
+  - Fresh Fruits & Vegetables
+  - Cooking Oil & Ghee
+  - Meat & Fish
+  - Bakery & Snacks
+  - Dairy & Eggs
+  - Beverages
+  - And more...
+
+- **UI/UX**
+  - Clean and modern interface
+  - Smooth animations and transitions
+  - Custom splash screen
+  - Category-based navigation
+  - Pull-to-refresh functionality
+  - Image carousels
+  - Loading states and error handling
+
+## 🛠️ Technology Stack
+
+- **Framework**
+  - React Native
+  - Expo Router
+
+- **State Management & Storage**
+  - AsyncStorage for local data persistence
+  - SecureStore for sensitive data
+
+- **UI Components**
+  - React Native Reanimated
+  - Custom components
+  - Vector icons
+  - Custom fonts (Gilroy)
+
+- **Navigation**
+  - Expo Router
+  - Tab-based navigation
+  - Stack navigation
+
+## 📱 Screenshots
+
+[Add your app screenshots here]
+
+## 🚀 Getting Started
+
+1. **Prerequisites**
    ```bash
+   - Node.js
+   - npm or yarn
+   - Expo CLI
+   ```
+
+2. **Installation**
+   ```bash
+   # Clone the repository
+   git clone [your-repo-link]
+
+   # Navigate to project directory
+   cd my-app
+
+   # Install dependencies
    npm install
    ```
 
-2. Start the app
-
+3. **Running the App**
    ```bash
-    npx expo start
+   # Start the development server
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## 📄 Project Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+my-app/
+├── app/                   # Main application code
+│   ├── (auth)/           # Authentication screens
+│   ├── (tabs)/           # Tab-based screens
+│   └── screens/          # Other screens
+├── components/           # Reusable components
+├── constants/           # Theme and configuration
+└── assets/             # Images and fonts
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🔐 Environment Variables
 
-## Learn more
+Create a `.env` file in the root directory:
 
-To learn more about developing your project with Expo, look at the following resources:
+```env
+API_URL=your_api_url
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🤝 Contributing
 
-## Join the community
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Join our community of developers creating universal apps.
+## 📝 License
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Expo](https://expo.dev/)
+- [React Native](https://reactnative.dev/)
+- [Vector Icons](https://github.com/oblador/react-native-vector-icons)
