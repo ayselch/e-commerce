@@ -3,6 +3,9 @@ import React, { useEffect, useRef } from 'react'
 import { COLORS, SIZES, FONT } from '../../constants/theme'
 import { useRouter } from 'expo-router'
 
+const defaultAcceptImage = require('../../assets/images/acceptImage.png');
+const defaultBackground = require('../../assets/images/backgroundFinal.jpg');
+
 const CheckoutAccept = () => {
     const router = useRouter()
     const fadeAnim = useRef(new Animated.Value(0)).current
@@ -26,7 +29,9 @@ const CheckoutAccept = () => {
     return (
         <ImageBackground
             style={styles.background}
-            source={require('../../assets/images/backgroundFinal.jpg')}>
+            source={defaultBackground}
+            defaultSource={defaultBackground}
+            resizeMode='cover'>
             <SafeAreaView style={styles.safeArea}>
                 <Animated.View style={[
                     styles.mainContent,
@@ -36,7 +41,12 @@ const CheckoutAccept = () => {
                     }
                 ]}>
                     <View style={styles.headerContainer}>
-                        <Image style={styles.image} source={require('../../assets/images/acceptImage.png')} />
+                        <Image
+                            style={styles.image}
+                            source={defaultAcceptImage}
+                            defaultSource={defaultAcceptImage}
+                            onError={() => { }}
+                        />
                         <Text style={styles.header}>Your Order has been accepted</Text>
                         <Text style={styles.title}>Your items has been placed and is on it's way to being processed</Text>
                     </View>

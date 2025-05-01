@@ -7,6 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import CustomAlert from '../../../components/CustomAlert';
 
+const defaultLocationImg = require('../../../assets/images/locationImg.png');
+const defaultBackground = require('../../../assets/images/backgroundFinal.jpg');
 
 const SelectLocation = () => {
     const router = useRouter();
@@ -101,7 +103,8 @@ const SelectLocation = () => {
             <ImageBackground
                 style={{ flex: 1 }}
                 resizeMode='cover'
-                source={require('../../../assets/images/backgroundFinal.jpg')}>
+                source={defaultBackground}
+                defaultSource={defaultBackground}>
                 <StatusBar style="light" />
                 <TouchableOpacity
                     onPress={() => router.back()}
@@ -113,7 +116,10 @@ const SelectLocation = () => {
                 <View style={styles.imageContainer}>
                     <Image
                         style={styles.image}
-                        source={require('../../../assets/images/locationImg.png')} />
+                        source={defaultLocationImg}
+                        defaultSource={defaultLocationImg}
+                        onError={() => { }}
+                    />
                 </View>
 
                 <View style={styles.titleContainer}>

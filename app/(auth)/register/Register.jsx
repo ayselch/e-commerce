@@ -12,6 +12,9 @@ import * as SecureStore from 'expo-secure-store';
 import CustomAlert from '../../../components/CustomAlert'
 import { useRouter } from 'expo-router';
 
+const defaultIcon = require('../../../assets/images/iconColorful.png');
+const defaultBackground = require('../../../assets/images/backgroundFinal.jpg');
+
 const ValidationItem = ({ isValid, text }) => (
     <View style={styles.validationItemContainer}>
         <View style={[styles.checkCircle, isValid && styles.validCheckCircle]}>
@@ -32,7 +35,7 @@ const RegisterScreen = () => {
     const alertRef = useRef();
 
     const showAlert = (message) => {
-      alertRef.current?.show(message);
+        alertRef.current?.show(message);
     };
 
     const [errors, setErrors] = useState({
@@ -102,7 +105,7 @@ const RegisterScreen = () => {
         return isValid
     }
 
-   
+
     const handleRegister = async () => {
         if (!validateForm()) {
             return;
@@ -152,7 +155,8 @@ const RegisterScreen = () => {
             >
                 <ImageBackground
                     style={{ flex: 1 }}
-                    source={require('../../../assets/images/backgroundFinal.jpg')}
+                    source={defaultBackground}
+                    defaultSource={defaultBackground}
                     resizeMode='cover'
                 >
                     <StatusBar style="dark" />
@@ -170,8 +174,12 @@ const RegisterScreen = () => {
                             <CustomAlert ref={alertRef} />
                             <View style={styles.mainContainer}>
                                 <View style={styles.iconContainer}>
-                                    <Image style={styles.icon}
-                                        source={require('../../../assets/images/iconColorful.png')} />
+                                    <Image
+                                        style={styles.icon}
+                                        source={defaultIcon}
+                                        defaultSource={defaultIcon}
+                                        onError={() => { }}
+                                    />
                                 </View>
 
                                 <View style={styles.headerContainer}>

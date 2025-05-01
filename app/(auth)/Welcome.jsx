@@ -4,6 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { router, useRouter } from 'expo-router';
 
+const defaultLogo = require('../../assets/images/nectarIcon.png');
+const defaultBackground = require('../../assets/images/welcomeBack.png');
 
 const { width } = Dimensions.get('window');
 
@@ -15,16 +17,19 @@ const Welcome = () => {
     })
     return (
         <ImageBackground
-            source={require('../../assets/images/welcomeBack.png')}
+            source={defaultBackground}
             style={styles.background}
-            resizeMode="cover">
-            {/* <View style={{backgroundColor:"red", flex:1}}> */}
+            resizeMode="cover"
+            defaultSource={defaultBackground}>
             <StatusBar style="dark" />
             <View style={styles.emptyContainer} />
             <View style={styles.mainContainer}>
                 <Image
                     style={styles.logo}
-                    source={require('../../assets/images/nectarIcon.png')} />
+                    source={defaultLogo}
+                    defaultSource={defaultLogo}
+                    onError={() => { }}
+                />
                 <Text style={styles.title}>Welcome</Text>
                 <Text style={styles.title}>to our store</Text>
                 <Text style={styles.subtitle}>Ger your groceries in as fast as one hour</Text>
@@ -34,8 +39,6 @@ const Welcome = () => {
                 </TouchableOpacity>
 
             </View>
-
-            {/* </View> */}
 
         </ImageBackground>
 
@@ -47,15 +50,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     emptyContainer: {
-        flex: 1, 
+        flex: 1,
     },
     mainContainer: {
-        flex: 1, 
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
         width: '100%',
-        paddingBottom: 20, 
+        paddingBottom: 20,
     },
     logoContainer: {
         alignItems: "center",
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 16,
-        color: 'rgba(252, 252, 252, 0.7)', 
+        color: 'rgba(252, 252, 252, 0.7)',
         textAlign: 'center',
         marginTop: 10,
         marginBottom: 40,
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#53B175',
         borderRadius: 25,
         width: '90%',
-        paddingVertical: 20, 
+        paddingVertical: 20,
         alignItems: 'center',
         justifyContent: 'center',
     },

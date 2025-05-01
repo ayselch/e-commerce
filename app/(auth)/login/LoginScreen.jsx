@@ -10,6 +10,9 @@ import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 
+const defaultIcon = require('../../../assets/images/iconColorful.png');
+const defaultBackground = require('../../../assets/images/backgroundFinal.jpg');
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -117,7 +120,8 @@ const LoginScreen = () => {
             <ImageBackground
               style={styles.backgroundImage}
               resizeMode='cover'
-              source={require('../../../assets/images/backgroundFinal.jpg')}
+              source={defaultBackground}
+              defaultSource={defaultBackground}
             >
               <StatusBar style="dark" />
 
@@ -125,8 +129,12 @@ const LoginScreen = () => {
                 styles.iconContainer,
                 keyboardVisible && { paddingVertical: 20 }
               ]}>
-                <Image style={styles.icon}
-                  source={require('../../../assets/images/iconColorful.png')} />
+                <Image
+                  style={styles.icon}
+                  source={defaultIcon}
+                  defaultSource={defaultIcon}
+                  onError={() => { }}
+                />
               </View>
 
               <View style={[

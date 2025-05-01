@@ -1,18 +1,22 @@
 import { Image } from 'expo-image';
 import React, { useState } from 'react';
 
-const ExpoImage = ({ source, style, contentFit = 'cover', ...rest }) => {
+const defaultImage = require('../assets/images/nectarIcon.png');
+
+const ExpoImage = ({ source, style, contentFit = 'cover', placeholder = defaultImage, ...rest }) => {
   const [hasError, setHasError] = useState(false);
 
-  const fallbackImage = require('../assets/images/nectarIcon.png');
+  const handleError = () => {
+    setHasError(true);
+  };
 
   return (
     <Image
-      source={hasError ? fallbackImage : source}
+      source={hasError ? placeholder : source}
       style={style}
-      contentFit={contentFit} 
+      contentFit={contentFit}
       transition={300}
-      onError={() => setHasError(true)}
+      onError={handleError}
       {...rest}
     />
   );

@@ -2,15 +2,18 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 
+const defaultIcon = require('../assets/images/nectarIcon.png');
+
 export default function SplashScreen({ onLayout }) {
     return (
         <View style={styles.mainContainer} onLayout={onLayout}>
             <View style={styles.container}>
                 <StatusBar style='dark' />
                 <Image
-                    source={require('../assets/images/nectarIcon.png')}
+                    source={defaultIcon}
                     style={styles.icon}
                     resizeMode="contain"
+                    defaultSource={defaultIcon}
                 />
                 <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Text style={styles.text1}>nectar</Text>

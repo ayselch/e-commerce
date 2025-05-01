@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Text, View } from "react-native";
 import * as Font from 'expo-font';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomSplashScreen from '../components/SplashScreen';
+import CustomSplashScreen from '../components/SplashScreen'; // Yalnız bu splash istifadə olunur
 
 export default function Index() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -16,7 +16,10 @@ export default function Index() {
           'Gilroy-M': require('../assets/fonts/Gilroy-Medium.ttf'),
           'Gilroy-B': require('../assets/fonts/Gilroy-Bold.ttf'),
         });
-        
+
+        // Süni gecikmə: məsələn, 2 saniyə
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
         setFontsLoaded(true);
         await checkAuthStatus();
       } catch (error) {
@@ -27,6 +30,7 @@ export default function Index() {
 
     prepare();
   }, []);
+
 
   const checkAuthStatus = async () => {
     try {

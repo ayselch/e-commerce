@@ -6,11 +6,13 @@ import { MaterialIcons, Feather, MaterialCommunityIcons, Octicons } from '@expo/
 import { useRouter } from 'expo-router'
 import CustomAlert from '../../../components/CustomAlert'
 
+const defaultProfileImage = require('../../../assets/images/userIcon.png');
+
 const Profile = () => {
   const router = useRouter()
   const [userName, setUserName] = useState('User Name')
   const [userEmail, setUserEmail] = useState('email@example.com')
-  const [profileImage, setProfileImage] = useState('https://static.vecteezy.com/system/resources/thumbnails/024/983/914/small_2x/simple-user-default-icon-free-png.png')
+  const [profileImage, setProfileImage] = useState(defaultProfileImage)
   const alertRef = useRef();
 
   const showAlert = (message) => {
@@ -82,7 +84,12 @@ const Profile = () => {
 
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: profileImage }} />
+          <Image
+            style={styles.image}
+            source={typeof profileImage === 'string' ? { uri: profileImage } : profileImage}
+            defaultSource={defaultProfileImage}
+            onError={() => setProfileImage(defaultProfileImage)}
+          />
           <View style={styles.editIconContainer}>
             <MaterialIcons name="edit" size={20} color="white" />
           </View>
@@ -124,7 +131,7 @@ const Profile = () => {
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
 
-    
+
     </SafeAreaView>
   )
 }
