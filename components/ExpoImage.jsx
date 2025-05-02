@@ -10,10 +10,15 @@ const ExpoImage = ({ source, style, contentFit = 'cover', placeholder = defaultI
     setHasError(true);
   };
 
+  const combinedStyle = {
+    ...style,
+    resizeMode: contentFit,
+  };
+
   return (
     <Image
       source={hasError ? placeholder : source}
-      style={style}
+      style={combinedStyle}
       contentFit={contentFit}
       transition={300}
       onError={handleError}

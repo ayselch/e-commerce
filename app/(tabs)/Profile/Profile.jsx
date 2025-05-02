@@ -1,10 +1,11 @@
-import { View, Text, SafeAreaView, StyleSheet, Platform, Image, TouchableOpacity, Animated } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as ImagePicker from 'expo-image-picker'
 import { MaterialIcons, Feather, MaterialCommunityIcons, Octicons } from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import CustomAlert from '../../../components/CustomAlert'
+import ExpoImage from '../../../components/ExpoImage'
 
 const defaultProfileImage = require('../../../assets/images/userIcon.png');
 
@@ -12,7 +13,7 @@ const Profile = () => {
   const router = useRouter()
   const [userName, setUserName] = useState('User Name')
   const [userEmail, setUserEmail] = useState('email@example.com')
-  const [profileImage, setProfileImage] = useState(defaultProfileImage)
+  const [profileImage, setProfileImage] = useState(null)
   const alertRef = useRef();
 
   const showAlert = (message) => {
@@ -31,7 +32,9 @@ const Profile = () => {
 
       if (storedName) setUserName(storedName)
       if (storedEmail) setUserEmail(storedEmail)
-      if (storedImage) setProfileImage(storedImage)
+      if (storedImage) {
+        setProfileImage({ uri: storedImage })
+      }
     } catch (error) {
       console.error('Error loading user data:', error)
     }
@@ -55,7 +58,7 @@ const Profile = () => {
 
       if (!result.canceled) {
         const imageUri = result.assets[0].uri
-        setProfileImage(imageUri)
+        setProfileImage({ uri: imageUri })
         await AsyncStorage.setItem('profileImage', imageUri)
         showAlert('Profile picture updated successfully!')
       }
@@ -84,11 +87,12 @@ const Profile = () => {
 
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={pickImage} style={styles.imageContainer}>
-          <Image
+          <ExpoImage
             style={styles.image}
-            source={typeof profileImage === 'string' ? { uri: profileImage } : profileImage}
-            defaultSource={defaultProfileImage}
-            onError={() => setProfileImage(defaultProfileImage)}
+            source={profileImage || defaultProfileImage}
+            placeholder={defaultProfileImage}
+            contentFit="contain"
+            transition={300}
           />
           <View style={styles.editIconContainer}>
             <MaterialIcons name="edit" size={20} color="white" />
@@ -128,7 +132,7 @@ const Profile = () => {
       </View>
 
       <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-        <Text style={styles.logoutText}>Logout</Text>
+        <Text style={styles.logoutText}>Log Out</Text>
       </TouchableOpacity>
 
 
@@ -140,33 +144,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: Platform.OS === 'android' ? 30 : 0,
-    padding: 20,
+    paddingTop: Platform.OS === 'ios' ? 40 : 30,
+    paddingHorizontal: 20,
+    paddingBottom: Platform.OS === 'ios' ? 0 : 20,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: Platform.OS === 'ios' ? 15 : 20,
   },
   imageContainer: {
     position: 'relative',
+    width: 80,
+    height: 80,
+    marginRight: 20,
   },
   image: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    marginRight: 20,
+    borderWidth: 1,
+    borderColor: '#E2E2E2',
   },
+
   editIconContainer: {
     position: 'absolute',
-    right: 18,
-    bottom: 0,
+    right: -6,
+    bottom: -6,
     backgroundColor: '#53B175',
     borderRadius: 12,
     width: 24,
     height: 24,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
   },
   userInfo: {
     flex: 1,
