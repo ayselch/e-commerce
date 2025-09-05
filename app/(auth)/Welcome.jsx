@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { router, useRouter } from 'expo-router';
 
-const defaultLogo = require('../../assets/images/nectarIcon.png');
+const defaultLogo = require('../../assets/images/splashIcon.png');
 const defaultBackground = require('../../assets/images/welcomeBack.png');
 
 const { width } = Dimensions.get('window');

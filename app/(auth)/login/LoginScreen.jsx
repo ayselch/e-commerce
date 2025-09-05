@@ -246,9 +246,10 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: "center",
     paddingTop: 20,
+   
   },
   emailContainer: {
-    marginBottom: 2,
+    marginBottom: 20,
   },
   emailText: {
     fontSize: 16,
@@ -259,8 +260,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     fontFamily: 'Gilroy-M',
-    paddingVertical: 8,
-    color: '#181725'
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    color: '#181725',
+    borderWidth: 1,
+    borderColor: '#c8c4c4ff',
+    borderRadius: 10,
+    alignItems:'center',
+    justifyContent:'center',
   },
   eyeIcon: {
     position: 'absolute',
@@ -270,7 +277,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   passwordContainer: {
-    marginTop: 30,
+    marginTop: 10,
   },
   passwordText: {
     fontSize: 16,

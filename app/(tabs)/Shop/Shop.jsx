@@ -288,7 +288,7 @@ const Shop = () => {
             enableOnAndroid
             enableAutomaticScroll
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 180 }}
+            contentContainerStyle={{ paddingBottom: 100 }}
           >
             {/* Header */}
             <View style={styles.header}>

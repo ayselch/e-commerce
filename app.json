@@ -14,7 +14,7 @@
   "android": {
     "adaptiveIcon": {
       "foregroundImage": "./assets/images/adaptive-icon.png",
-      "backgroundColor": "black"
+      "backgroundColor": "#ffffff"
     },
     "package": "com.ayselch.myapp"
   },

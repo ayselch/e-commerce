@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 
-const defaultIcon = require('../assets/images/nectarIcon.png');
+const defaultIcon = require('../assets/images/splashIcon.png');
 
 export default function SplashScreen({ onLayout }) {
     return (
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     icon: {
-        width: 60,
-        height: 67,
+        width: 100,
+        height:100,
         marginRight: 15,
     },
     text1: {

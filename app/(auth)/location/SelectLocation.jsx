@@ -35,21 +35,29 @@ const SelectLocation = () => {
     useEffect(() => {
         const fetchCountries = async () => {
             try {
-                const response = await fetch('https://restcountries.com/v3.1/all');
+                const response = await fetch('https://restcountries.com/v3.1/all?fields=name');
                 const data = await response.json();
-                const countryList = data
-                    .map((country) => ({
-                        label: country.name.common,
-                        value: country.name.common.toLowerCase(),
-                    }))
-                    .sort((a, b) => a.label.localeCompare(b.label));
-                setCountries(countryList);
+                console.log('Countries API response:', data); // yoxlamaq üçün
+
+                if (Array.isArray(data)) {
+                    const countryList = data
+                        .map((country) => ({
+                            label: country.name.common,
+                            value: country.name.common.toLowerCase(),
+                        }))
+                        .sort((a, b) => a.label.localeCompare(b.label));
+                    setCountries(countryList);
+                } else {
+                    console.warn('Countries data is not an array:', data);
+                }
             } catch (error) {
                 console.error(error);
             }
         };
+
         fetchCountries();
     }, []);
+
 
     useEffect(() => {
         const fetchCities = async () => {
