@@ -11,9 +11,11 @@ const defaultProfileImage = require('../../../assets/images/userIcon.png');
 
 const Profile = () => {
   const router = useRouter()
-  const [userName, setUserName] = useState('User Name')
-  const [userEmail, setUserEmail] = useState('email@example.com')
-  const [profileImage, setProfileImage] = useState(null)
+  const [userData, setUserData] = useState({
+    name: 'User Name',
+    email: 'email@example.com',
+    profileImage: null
+  })
   const alertRef = useRef();
 
   const showAlert = (message) => {
@@ -26,15 +28,17 @@ const Profile = () => {
 
   const loadUserData = async () => {
     try {
-      const storedName = await AsyncStorage.getItem('userName')
-      const storedEmail = await AsyncStorage.getItem('userEmail')
-      const storedImage = await AsyncStorage.getItem('profileImage')
+      const [storedName, storedEmail, storedImage] = await Promise.all([
+        AsyncStorage.getItem('userName'),
+        AsyncStorage.getItem('userEmail'),
+        AsyncStorage.getItem('profileImage')
+      ])
 
-      if (storedName) setUserName(storedName)
-      if (storedEmail) setUserEmail(storedEmail)
-      if (storedImage) {
-        setProfileImage({ uri: storedImage })
-      }
+      setUserData({
+        name: storedName || userData.name,
+        email: storedEmail || userData.email,
+        profileImage: storedImage ? { uri: storedImage } : null
+      })
     } catch (error) {
       console.error('Error loading user data:', error)
     }
@@ -42,9 +46,8 @@ const Profile = () => {
 
   const pickImage = async () => {
     try {
-      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
-
-      if (!permissionResult.granted) {
+      const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (!granted) {
         showAlert('Permission to access camera roll is required!')
         return
       }
@@ -58,7 +61,7 @@ const Profile = () => {
 
       if (!result.canceled) {
         const imageUri = result.assets[0].uri
-        setProfileImage({ uri: imageUri })
+        setUserData(prev => ({ ...prev, profileImage: { uri: imageUri } }))
         await AsyncStorage.setItem('profileImage', imageUri)
         showAlert('Profile picture updated successfully!')
       }
@@ -72,9 +75,7 @@ const Profile = () => {
     try {
       await AsyncStorage.removeItem('isLoggedIn')
       showAlert('Logging out...')
-      setTimeout(() => {
-        router.push('/(auth)/login/LoginScreen')
-      }, 1000)
+      setTimeout(() => router.push('/(auth)/login/LoginScreen'), 1000)
     } catch (error) {
       console.error('Error logging out:', error)
       showAlert('Error logging out. Please try again.')
@@ -108,22 +109,25 @@ const Profile = () => {
       <View style={{ height: 1, backgroundColor: '#E2E2E2', width: '100%', marginTop: 40 }} />
 
       <View style={styles.otherContainer}>
-        <TouchableOpacity style={styles.innerContainers}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <TouchableOpacity
+          style={styles.innerContainers}
+          onPress={() => router.push('/screens/MyOrders')}
+        >
+          <View style={styles.menuItemLeft}>
             <Feather name="shopping-bag" size={24} color="#181725" />
             <Text style={styles.orderText}>My Orders</Text>
           </View>
           <MaterialIcons name="keyboard-arrow-right" size={24} color="#181725" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.innerContainers}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.menuItemLeft}>
             <MaterialCommunityIcons name="card-account-details-outline" size={24} color="#181725" />
             <Text style={styles.orderText}>My Details</Text>
           </View>
           <MaterialIcons name="keyboard-arrow-right" size={24} color="#181725" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.innerContainers}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.menuItemLeft}>
             <Octicons name="location" size={24} color="#181725" />
             <Text style={styles.orderText}>Delivery Address</Text>
           </View>
@@ -166,7 +170,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E2E2E2',
   },
-
   editIconContainer: {
     position: 'absolute',
     right: -6,
@@ -196,7 +199,6 @@ const styles = StyleSheet.create({
   },
   otherContainer: {
     marginTop: 20,
-    // padding: 20,
     width: '100%',
   },
   innerContainers: {
@@ -208,8 +210,12 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     borderRadius: 15,
     paddingVertical: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     width: '100%',
+  },
+  menuItemLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   orderText: {
     fontSize: 18,
@@ -229,31 +235,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontFamily: 'Gilroy-B',
-  },
-  alertContainer: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 50 : 30,
-    left: 20,
-    right: 20,
-    backgroundColor: '#53B175',
-    padding: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    zIndex: 1000,
-  },
-  alertText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: 'Gilroy-B',
-    textAlign: 'center',
   },
 })
 
